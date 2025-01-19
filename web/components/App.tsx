@@ -6,11 +6,17 @@ import Index from "../routes/index";
 import SignedInPage from "../routes/signed-in";
 import SignInPage from "../routes/sign-in";
 import SignUpPage from "../routes/sign-up";
+import NewPerson from "../routes/new-person";
+import FullAccount from "../routes/fullaccount";
 import ResetPasswordPage from "../routes/reset-password";
 import VerifyEmailPage from "../routes/verify-email";
 import ChangePassword from "../routes/change-password";
 import ForgotPassword from "../routes/forgot-password";
 import "./App.css";
+import Navbar from "../components/Navbar";
+import AlertButton from "../components/AlertButton";
+import { useLocation } from "react-router";
+import LiveMap from "../routes/LiveMap";
 
 const App = () => {
   useEffect(() => {
@@ -36,6 +42,7 @@ const App = () => {
             </SignedInOrRedirect>
           }
         />
+
         <Route
           path="change-password"
           element={
@@ -65,6 +72,22 @@ const App = () => {
           element={
             <SignedOutOrRedirect>
               <SignUpPage />
+            </SignedOutOrRedirect>
+          }
+        />
+        <Route
+          path="new-person"
+          element={
+            <SignedOutOrRedirect>
+              <NewPerson />
+            </SignedOutOrRedirect>
+          }
+        />
+        <Route
+          path="full-account"
+          element={
+            <SignedOutOrRedirect>
+              <FullAccount />
             </SignedOutOrRedirect>
           }
         />
@@ -109,19 +132,49 @@ const Layout = () => {
 };
 
 const Header = () => {
+  const location = useLocation();
+
+  const getAuthLinks = () => {
+    if (location.pathname === '/full-account') {
+      return null;
+    }
+
+    if (location.pathname === '/') {
+      return null;
+    }
+    if (location.pathname === '/sign-in') {
+      return (
+        <SignedOut>
+          <Link to="/sign-up" style={{ color: "white", textDecoration: "none" }}>Sign up</Link>
+        </SignedOut>
+      );
+    }
+    if (location.pathname === '/sign-up') {
+      return (
+        <SignedOut>
+          <Link to="/sign-in" style={{ color: "white", textDecoration: "none" }}>Sign in</Link>
+        </SignedOut>
+      );
+    }
+    return (
+      <SignedOut>
+        <Link to="/sign-in" style={{ color: "white", textDecoration: "none" }}>Sign in</Link>
+        <Link to="/sign-up" style={{ color: "white", textDecoration: "none" }}>Sign up</Link>
+      </SignedOut>
+    );
+  };
+
   return (
-    <div className="header">
+    <div style={{ background: "red" }} className="header">
       <a href="/" target="_self" rel="noreferrer" style={{ textDecoration: "none" }}>
-        <div className="logo">{process.env.GADGET_APP}</div>
+        <h1 style={{ color: "white" }}>uSafe</h1>
       </a>
       <div className="header-content">
-        <SignedOut>
-          <Link to="/sign-in" style={{ color: "black" }}>Sign in</Link>
-          <Link to="/sign-up" style={{ color: "black" }}>Sign up</Link>
-        </SignedOut>
+        {getAuthLinks()}
+        <Navbar />
       </div>
     </div>
   );
 };
-
 export default App;
+

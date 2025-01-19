@@ -5,7 +5,6 @@ export const run: ActionRun = async ({ params, record, logger, api, connections 
   await save(record);
 };
 
- 
 export const options: ActionOptions = {
-  actionType: "update"
+  actionType: "create",
 };

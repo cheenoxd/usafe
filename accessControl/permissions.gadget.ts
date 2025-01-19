@@ -16,6 +16,15 @@ export const permissions: GadgetPermissions = {
         action: true,
       },
       models: {
+        location: {
+          read: true,
+          actions: {
+            create: true,
+            delete: true,
+            update: true,
+            updateLocation: true,
+          },
+        },
         user: {
           read: {
             filter: "accessControl/filters/user/tenant.gelly",
@@ -24,9 +33,18 @@ export const permissions: GadgetPermissions = {
             changePassword: {
               filter: "accessControl/filters/user/tenant.gelly",
             },
+            signedIn: true,
             signOut: {
               filter: "accessControl/filters/user/tenant.gelly",
             },
+          },
+        },
+        userInfo: {
+          read: true,
+          actions: {
+            create: true,
+            delete: true,
+            update: true,
           },
         },
       },

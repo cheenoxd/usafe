@@ -1,6 +1,8 @@
 import { useActionForm } from "@gadgetinc/react";
 import { api } from "../api";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
+import { Link } from "react-router";
+
 
 export default function () {
   const {
@@ -23,8 +25,7 @@ export default function () {
         {errors?.user?.password?.message && <p className="format-message error">Password: {errors.user.password.message}</p>}
         {errors?.root?.message && <p className="format-message error">{errors.root.message}</p>}
         {isSubmitSuccessful && <p className="format-message success">Please check your inbox</p>}
-        <button disabled={isSubmitting} type="submit">
-          Sign up
+        <button disabled={isSubmitting} type="submit"> Sign Up!
         </button>
       </div>
     </form>

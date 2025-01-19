@@ -27,6 +27,13 @@ export const schema: GadgetModel = {
       storageKey: "IZLaXWpNAWVO",
     },
     firstName: { type: "string", storageKey: "pT628ogUXb41" },
+    gender: {
+      type: "enum",
+      acceptMultipleSelections: false,
+      acceptUnlistedOptions: false,
+      options: ["Female", "Male", "Non-binary"],
+      storageKey: "97zIEdz_VBZn",
+    },
     googleImageUrl: { type: "url", storageKey: "rz24JoTG5mt4" },
     googleProfileId: { type: "string", storageKey: "SzA0VNP8KRYu" },
     lastName: { type: "string", storageKey: "-sWlCeO7J_CQ" },
